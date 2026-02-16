@@ -1,0 +1,120 @@
+# ==========================================
+# .gitignore for Node.js Backend
+# (Express + MongoDB + Mongoose + Nodemon)
+# ==========================================
+
+# ============ Node.js ============
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Package manager lock files (optional - uncomment if needed)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# ============ Environment Variables ============
+# IMPORTANT: Never commit sensitive data!
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.*.local
+
+# ============ Logs ============
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+combined.log
+error.log
+access.log
+
+# ============ Build & Cache ============
+dist/
+build/
+.cache/
+*.tgz
+
+# ============ Testing ============
+coverage/
+.nyc_output/
+*.lcov
+
+# ============ MongoDB ============
+# Local MongoDB data (if running locally)
+data/
+mongodb-data/
+*.lock
+
+# MongoDB dumps
+dump/
+*.bson
+
+# ============ Uploads & Temp Files ============
+uploads/
+temp/
+tmp/
+*.tmp
+
+# ============ OS Specific ============
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+.directory
+
+# ============ IDE & Editors ============
+# VS Code
+.vscode/
+*.code-workspace
+.history/
+
+# JetBrains (WebStorm, IntelliJ)
+.idea/
+*.iml
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+
+# ============ Optional - Uncomment if needed ============
+# SSL Certificates (if storing locally - better to use env)
+# *.pem
+# *.key
+# *.cert
+# *.crt
+
+# Config files with sensitive data
+# config/production.json
+# config/secrets.json
+
+# Session storage
+# sessions/
+
+# PM2 (if using for deployment)
+# .pm2/
+# ecosystem.config.js
+
+# Docker (uncomment if using)
+# docker-compose.override.yml

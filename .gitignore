@@ -49,7 +49,7 @@ coverage/
 
 # ============ MongoDB ============
 # Local MongoDB data (if running locally)
-data/
+# data/
 mongodb-data/
 *.lock
 

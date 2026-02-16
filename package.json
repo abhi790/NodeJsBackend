@@ -1,0 +1,16 @@
+{
+  "name": "procademynew",
+  "version": "1.0.0",
+  "description": "This project is going to be a backend project using nodejs, expressjs, mongodb and other required tect",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "booking",
+    "hotel",
+    "reservation"
+  ],
+  "author": "Abhimanyu Roy",
+  "license": "ISC"
+}

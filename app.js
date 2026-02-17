@@ -11,4 +11,7 @@ app.get("/api/v1/hotels", hotelController.getAllHotels);
 // POST: localhost:3000/api/v1/hotels
 app.post("/api/v1/hotels", hotelController.createHotel);
 
+// GET: localhost:5000/api/v1/hotels/:id
+app.get("/api/v1/hotels/:id", hotelController.getHotelById);
+
 module.exports = app;

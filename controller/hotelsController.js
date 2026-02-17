@@ -15,6 +15,24 @@ const checkHotelExist = (req, res, next, value, name) => {
   next();
 };
 
+// normal middleware function to check if user sent a valid object in body
+const validatePostBody = (req, res, next) => {
+  const body = req.body;
+  if (!body) {
+    return res.status(400).json({
+      status: "fail",
+      message: "Request body does not contain a body",
+    });
+  }
+  if (!body.name || !body.city || !body.price) {
+    return res.status(400).json({
+      status: "fail",
+      message: "Request body does not contain a valid hotel object",
+    });
+  }
+  next();
+};
+
 // Get all hotels
 const get = (req, res) => {
   res.status(200).json({
@@ -101,6 +119,7 @@ module.exports = {
   update,
   deleteH,
   checkHotelExist,
+  validatePostBody,
 };
 
 /**

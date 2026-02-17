@@ -3,7 +3,7 @@ const fs = require("fs");
 // read hotels.json file
 const hotels = JSON.parse(fs.readFileSync("./data/hotels.json", "utf-8"));
 // Get all hotels
-const getAllHotels = (req, res) => {
+const get = (req, res) => {
   res.status(200).json({
     status: "success",
     data: { hotels: hotels, count: hotels.length },
@@ -11,7 +11,7 @@ const getAllHotels = (req, res) => {
 };
 
 // create new hotel
-const createHotel = (req, res) => {
+const create = (req, res) => {
   const newId = hotels[hotels.length - 1].id + 1;
   const newHotel = Object.assign({ id: newId }, req.body);
   hotels.push(newHotel);
@@ -28,7 +28,7 @@ const createHotel = (req, res) => {
 };
 
 // Get hotel by id
-const getHotelById = (req, res) => {
+const getById = (req, res) => {
   //   console.log(req.params); // {id : '1' }
   const id = Number(req.params.id);
   const hotel = hotels.find((hotel) => hotel.id === id);
@@ -50,7 +50,7 @@ const getHotelById = (req, res) => {
 };
 
 // update hotel by id, do nothing if hotel not exist
-const updateHotel = (req, res) => {
+const update = (req, res) => {
   //   console.log(req.params); // {id : '1' }
   const id = Number(req.params.id);
   const hotelToUpdate = hotels.find((hotel) => hotel.id === id);
@@ -79,7 +79,7 @@ const updateHotel = (req, res) => {
 };
 
 // Delete a hotel by id
-const deleteHotel = (req, res) => {
+const deleteH = (req, res) => {
   // get the id from req.params
   const id = Number(req.params.id);
   // get the hotel delete to
@@ -111,11 +111,11 @@ const deleteHotel = (req, res) => {
 };
 
 module.exports = {
-  getAllHotels,
-  createHotel,
-  getHotelById,
-  updateHotel,
-  deleteHotel,
+  get,
+  create,
+  getById,
+  update,
+  deleteH,
 };
 
 /**

@@ -1,5 +1,6 @@
 const express = require("express");
 const hotelRouter = require("./routers/hotelsRouter");
+const userRouter = require("./routers/usersRouter");
 const morgan = require("morgan");
 
 // CREATING AN EXPRESS APP
@@ -24,5 +25,7 @@ app.use(logger);
 // ADDING ROUTES FOR APP
 // routes for hotels
 app.use("/api/v1/hotels", hotelRouter);
+// routes for users
+app.use("/api/v1/users", userRouter);
 
 module.exports = app;

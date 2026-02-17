@@ -3,7 +3,7 @@ const userController = require("../controller/usersController");
 
 const usersRouter = express.Router();
 
-// defining param middleware
+// defining param middleware - has 5 parameter
 const paramMiddleware = (req, res, next, value, name) => {
   console.log(`ID Route Parameter Value: ` + value);
   // need to call next() in order to give control to other middleware to perform it's task

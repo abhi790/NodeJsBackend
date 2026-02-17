@@ -2,6 +2,19 @@ const fs = require("fs");
 
 // read hotels.json file
 const hotels = JSON.parse(fs.readFileSync("./data/hotels.json", "utf-8"));
+
+// param middleware to eliminate repetative code
+const checkHotelExist = (req, res, next, value, name) => {
+  const hotel = hotels.find((hotel) => hotel.id === Number(value));
+  if (!hotel) {
+    return res.status(404).json({
+      status: "fail",
+      message: `Hotel with ID ${value} cannot be found`,
+    });
+  }
+  next();
+};
+
 // Get all hotels
 const get = (req, res) => {
   res.status(200).json({
@@ -32,15 +45,6 @@ const getById = (req, res) => {
   //   console.log(req.params); // {id : '1' }
   const id = Number(req.params.id);
   const hotel = hotels.find((hotel) => hotel.id === id);
-  // if hotel doesn't exit
-  if (!hotel) {
-    return res.status(404).json({
-      status: "success",
-      data: {
-        message: `Hotel with id : ${id} is not found`,
-      },
-    });
-  }
   res.status(200).json({
     status: "success",
     data: {
@@ -54,15 +58,6 @@ const update = (req, res) => {
   //   console.log(req.params); // {id : '1' }
   const id = Number(req.params.id);
   const hotelToUpdate = hotels.find((hotel) => hotel.id === id);
-  // if hotel doesn't exit
-  if (!hotelToUpdate) {
-    return res.status(404).json({
-      status: "success",
-      data: {
-        message: `Hotel with id : ${id} is not found`,
-      },
-    });
-  }
   const index = hotels.indexOf(hotelToUpdate);
   const body = req.body;
   const updatedHotel = Object.assign(hotelToUpdate, body); //2nd will override 1st, all common attributes will be replaced
@@ -84,17 +79,6 @@ const deleteH = (req, res) => {
   const id = Number(req.params.id);
   // get the hotel delete to
   const hotelDeleteTo = hotels.find((hotel) => hotel.id === id);
-
-  // handle the case where hotel is not found
-  if (!hotelDeleteTo) {
-    return res.status(404).json({
-      status: "fail",
-      data: {
-        message: `Cannot delete because the hotel with ID : ${id} doesn't exist`,
-      },
-    });
-  }
-
   // find the index of the hotel we need to delete
   const index = hotels.indexOf(hotelDeleteTo);
   //   delete from hotels array
@@ -116,6 +100,7 @@ module.exports = {
   getById,
   update,
   deleteH,
+  checkHotelExist,
 };
 
 /**

@@ -49,10 +49,40 @@ const getHotelById = (req, res) => {
   });
 };
 
+// update hotel by id, do nothing if hotel not exist
+const updateHotel = (req, res) => {
+  //   console.log(req.params); // {id : '1' }
+  const id = Number(req.params.id);
+  const hotelToUpdate = hotels.find((hotel) => hotel.id === id);
+  // if hotel doesn't exit
+  if (!hotelToUpdate) {
+    return res.status(404).json({
+      status: "success",
+      data: {
+        message: `Hotel with id : ${id} is not found`,
+      },
+    });
+  }
+  const index = hotels.indexOf(hotelToUpdate);
+  const body = req.body;
+  const updatedHotel = Object.assign(hotelToUpdate, body); //2nd will override 1st, all common attributes will be replaced
+  hotels[index] = updatedHotel;
+  //   write to file hotels.json
+  fs.writeFile("./data/hotels.json", JSON.stringify(hotels), () => {
+    res.status(201).json({
+      status: "success",
+      data: {
+        hotels: updatedHotel,
+      },
+    });
+  });
+};
+
 module.exports = {
   getAllHotels,
   createHotel,
   getHotelById,
+  updateHotel,
 };
 
 /**

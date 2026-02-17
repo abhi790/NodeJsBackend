@@ -14,4 +14,7 @@ app.post("/api/v1/hotels", hotelController.createHotel);
 // GET: localhost:5000/api/v1/hotels/:id
 app.get("/api/v1/hotels/:id", hotelController.getHotelById);
 
+// PATCH: localhost:5000/api/v1/hotels/:id
+app.patch("/api/v1/hotels/:id", hotelController.updateHotel);
+
 module.exports = app;

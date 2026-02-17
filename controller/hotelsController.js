@@ -69,10 +69,42 @@ const updateHotel = (req, res) => {
   hotels[index] = updatedHotel;
   //   write to file hotels.json
   fs.writeFile("./data/hotels.json", JSON.stringify(hotels), () => {
-    res.status(201).json({
+    res.status(200).json({
       status: "success",
       data: {
         hotels: updatedHotel,
+      },
+    });
+  });
+};
+
+// Delete a hotel by id
+const deleteHotel = (req, res) => {
+  // get the id from req.params
+  const id = Number(req.params.id);
+  // get the hotel delete to
+  const hotelDeleteTo = hotels.find((hotel) => hotel.id === id);
+
+  // handle the case where hotel is not found
+  if (!hotelDeleteTo) {
+    return res.status(404).json({
+      status: "fail",
+      data: {
+        message: `Cannot delete because the hotel with ID : ${id} doesn't exist`,
+      },
+    });
+  }
+
+  // find the index of the hotel we need to delete
+  const index = hotels.indexOf(hotelDeleteTo);
+  //   delete from hotels array
+  hotels.splice(index, 1);
+  //   updating the hotels.json file with the hotels that doesn't include deleted hotel
+  fs.writeFile("./data/hotels.json", JSON.stringify(hotels), () => {
+    res.status(204).json({
+      status: "success",
+      data: {
+        hotel: hotelDeleteTo,
       },
     });
   });
@@ -83,6 +115,7 @@ module.exports = {
   createHotel,
   getHotelById,
   updateHotel,
+  deleteHotel,
 };
 
 /**

@@ -17,4 +17,7 @@ app.get("/api/v1/hotels/:id", hotelController.getHotelById);
 // PATCH: localhost:5000/api/v1/hotels/:id
 app.patch("/api/v1/hotels/:id", hotelController.updateHotel);
 
+// PATCH: localhost:5000/api/v1/hotels/:id
+app.delete("/api/v1/hotels/:id", hotelController.deleteHotel);
+
 module.exports = app;

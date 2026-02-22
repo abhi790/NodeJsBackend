@@ -17,18 +17,39 @@ mongoose.connection.on("connected", () => console.log("connected"));
 
 // HOtel schema
 const hotelSchema = new mongoose.Schema({
-  name: String,
-  price: Number,
-  city: String,
+  // data validation
+  name: {
+    type: String,
+    required: [true, "Hotel Name is required"],
+    unique: [true, "Hotel Name must be unique"],
+    minlength: [5, "Hotel Name must have minimum 5 characters"],
+    maxlength: [100, "Hotel Name must have maximum 100 characters"],
+  },
+  price: {
+    type: Number,
+    required: [true, "Hotel Price is required"],
+    min: [1000, "Hotel Price must be minimum 1000"],
+    max: [10000, "Hotel Price must be maximum 10000"],
+  },
+  city: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 100,
+  },
 });
 
 // Create Model mongoose.model(model name, schema, collections optional(automatically plural to model name))
 const Hotel = mongoose.model("Hotel", hotelSchema);
-const hotel1 = new Hotel({ name: "Test 1", price: 1200, city: "Mumbai" });
+const hotel1 = new Hotel({ name: "Hotel Taj 2", price: 1200, city: "Mumbai" });
 hotel1
   .save()
-  .then((resolve) => console.log("Hotel Saved"))
-  .catch((error) => console.log("Didnot save the hotel", error.message)); //save method run asynchronously
+  .then((resolve) => {
+    console.log("Hotel Saved");
+  })
+  .catch((error) => {
+    console.log("Didnot save the hotel", error.message);
+  }); //save method run asynchronously
 
 // start listening
 app.listen(5000, "localhost", () => {
